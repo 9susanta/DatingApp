@@ -1,4 +1,6 @@
 using DatingApp.Data;
+using DatingApp.Interfaces;
+using DatingApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace DatingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddDbContext<DataContext>(option =>
             {
                 option.UseSqlite(_config.GetConnectionString("DefaultConnection"));
