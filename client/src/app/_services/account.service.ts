@@ -16,6 +16,19 @@ export class AccountService {
   //$ symbol because this a obserable varibale
 
   constructor(private http:HttpClient) { }
+
+  register(model:any)
+  {
+    return this.http.post(this.baseUrl+'account/register',model).pipe(map((user:User)=>{
+      if(user)
+      {
+        localStorage.setItem('user',JSON.stringify(user));
+        this.currentUserSource.next(user);
+      }
+    })
+    )
+  }
+  
   login(model:any)
   {
     return this.http.post(this.baseUrl+'Account/login',model).pipe(
