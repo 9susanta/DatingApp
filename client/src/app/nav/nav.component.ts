@@ -14,7 +14,8 @@ export class NavComponent implements OnInit {
   //not a good practice to use logged in
   currentUser$:Observable<User>;
 
-  constructor(private accountService: AccountService) { }
+  constructor(public accountService: AccountService) { }
+  //made it public to acesss in html 
   ngOnInit(): void {
     this.currentUser$=this.accountService.currentUser$;
   }
