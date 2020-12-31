@@ -19,6 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
     catchError(error=> 
     {
+      debugger;
       if(error)
       {
         switch (error.status) {
@@ -30,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                   modalStateErrors.push(error.error.errors[key])
                 }
               }
-              throw modalStateErrors;
+              throw modalStateErrors.flat();
             } else {
               this.toastr.error(error.statusText, error.status);
             }
