@@ -20,6 +20,7 @@ export class AccountService {
 
   register(model:any)
   {
+    debugger;
     return this.http.post(this.baseUrl+'account/register',model).pipe(map((user:User)=>{
       if(user)
       {
@@ -32,6 +33,7 @@ export class AccountService {
   
   login(model:any)
   {
+    debugger;
     return this.http.post(this.baseUrl+'Account/login',model).pipe(
       map((response:User)=>{
         const user=response;

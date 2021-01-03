@@ -19,7 +19,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
     catchError(error=> 
     {
-      debugger;
       if(error)
       {
         switch (error.status) {

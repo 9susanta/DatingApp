@@ -41,7 +41,7 @@ namespace DatingApp.Controllers
 
             return new UserDto
             {
-                UserName=user.UserName,
+                Username=user.UserName,
                 Token=_tokenService.CreateToken(user)
             };
         }
@@ -50,7 +50,7 @@ namespace DatingApp.Controllers
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
 
@@ -65,7 +65,11 @@ namespace DatingApp.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
-            return user;
+            return new UserDto
+            {
+                Username = user.UserName,
+                Token = _tokenService.CreateToken(user)
+            };
         }
     }
 }
