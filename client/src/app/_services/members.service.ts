@@ -113,6 +113,6 @@ export class MembersService {
     return this.http.post(this.baseUrl + 'likes/' + username, {})
   }
   getLikes(predicate: string) {
-    return this.http.get(this.baseUrl + 'likes?=' + predicate)
+    return this.http.get<Partial<Member[]>>(this.baseUrl + 'likes?predicate=' + predicate)
   }
 }
