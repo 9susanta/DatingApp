@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
@@ -26,13 +26,14 @@ export class MemberDetailComponent implements OnInit {
   user: User;
 
   constructor(private memberService: MembersService, private route: ActivatedRoute,
-    private messageService: MessageService,public presence: PresenceService,private accountService: AccountService) 
+    private messageService: MessageService,
+    public presence: PresenceService,private accountService: AccountService,private router: Router) 
     {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
   ngOnInit(): void {
-
     this.route.data.subscribe(data => {
       this.member = data.member;
     })
