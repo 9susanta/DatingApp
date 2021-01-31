@@ -58,7 +58,7 @@ namespace DatingApp.Extensions
                     connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
                 }
 
-                options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(connStr);
             });
 
             return services;
